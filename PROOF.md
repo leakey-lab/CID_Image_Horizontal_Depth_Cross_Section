@@ -19,6 +19,8 @@ This document explains the underlying geometry that creates these waves and prov
 
 For plant biologists studying roots, it's crucial to know the exact depth of the roots they see in the image. The goal of this algorithm is to use geometry and math to draw accurate wavy lines on the unrolled image that show exactly where each original horizontal soil depth (like 10cm deep, 20cm deep) intersects the tube wall. This allows for precise root analysis by depth.
 
+![Problem DIagram](depth-mapping-diagram.svg)
+
 ## Step 1: Where Are We Measuring From? Our Points of View
 
 To locate anything precisely, we need a system for describing positions. We'll use three ways to describe where a point is:
