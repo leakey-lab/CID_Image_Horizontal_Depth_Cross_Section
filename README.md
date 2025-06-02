@@ -106,8 +106,6 @@ The `cylinder_angle_deg` parameter represents the angle of the tube **above the 
 - 45° = typical installation angle
 - 90° = vertical (straight down)
 
-The code internally converts this to a descent angle for geometric calculations.
-
 ### Image Orientation
 
 - Input images are automatically rotated 90° to match the expected cylinder orientation
