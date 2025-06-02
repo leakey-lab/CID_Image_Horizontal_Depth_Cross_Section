@@ -161,13 +161,11 @@ def map_soil_depths_to_image(
 
     # Calculate cylinder parameters
     cylinder_radius_cm = cylinder_diameter_cm / 2
-    # FIXED: Convert angle above horizontal to angle below horizontal for geometric calculations
-    # The geometric formulas expect the descent angle, not ascent angle
-    descent_angle_deg = 180 - cylinder_angle_deg
-    descent_angle_rad = np.radians(descent_angle_deg)
+
+    asscent_angle_rad = np.radians(cylinder_angle_deg)
 
     print(f"Cylinder angle above horizontal: {cylinder_angle_deg}°")
-    print(f"Using descent angle for calculations: {descent_angle_deg}°")
+    # print(f"Using descent angle for calculations: {descent_angle_deg}°")
 
     extracted_sections = []
 
@@ -201,12 +199,12 @@ def map_soil_depths_to_image(
         x_positions = np.linspace(0, img_width, 1000)
         theta_positions = x_positions / img_width * 2 * np.pi
 
-        # Vertical offset due to depth (using descent angle)
-        depth_offset = depth_cm / np.sin(descent_angle_rad)
+        # Vertical offset due to depth (using asscent angle)
+        depth_offset = depth_cm / np.sin(asscent_angle_rad)
 
         # Sinusoidal variation around cylinder (using descent angle)
         angle_variation = (
-            cylinder_radius_cm * np.cos(theta_positions) / np.tan(descent_angle_rad)
+            cylinder_radius_cm * np.cos(theta_positions) / np.tan(asscent_angle_rad)
         )
 
         # Combine effects
@@ -352,7 +350,7 @@ def create_combined_visualization(section_infos, output_dir):
 def process_tube_images(
     input_dir,
     output_dir="processed_tube",
-    pattern="*L???.png",
+    pattern="*L???*.png",
     cylinder_angle_deg=45,
     cylinder_diameter_cm=10,
     depth_interval_cm=40,
@@ -415,7 +413,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("input_dir", help="Directory containing tube segment images")
     parser.add_argument(
-        "--pattern", default="*L???.png", help="Glob pattern to match image files"
+        "--pattern", default="*L???*.png", help="Glob pattern to match image files"
     )
     parser.add_argument(
         "--output_dir",
